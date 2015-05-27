@@ -10,6 +10,9 @@ Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-vinegar'
 Plug 'luochen1990/rainbow'
+Plug 'pangloss/vim-javascript'
+Plug 'digitaltoad/vim-jade'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -18,6 +21,9 @@ let g:netrw_banner=0
 set mouse=a
 set number
 set nowrap
+set hlsearch
+set ignorecase
+set incsearch
 " use system clipboard
 set clipboard+=unnamedplus
 filetype plugin indent on
@@ -55,6 +61,12 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|tmp)$'
   \ }
+
+" jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g`\"" | endif
+endif
 
 color molokai
 syntax on
