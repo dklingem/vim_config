@@ -1,53 +1,46 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-surround'
+Plug 'luochen1990/rainbow'
+
+" Search
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
-Plug 'bling/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-vinegar'
-Plug 'luochen1990/rainbow'
-Plug 'pangloss/vim-javascript'
-Plug 'digitaltoad/vim-jade'
+
+" Git
 Plug 'tpope/vim-fugitive'
-Plug 'raimondi/delimitMate'
+Plug 'airblade/vim-gitgutter'
+
+" Colors
+Plug 'nanotech/jellybeans.vim'
+Plug 'flazz/vim-colorschemes'
+
+" Clojure
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fireplace'
 
 call plug#end()
 
 " global settings
+filetype plugin indent on "Required for 'vim-clojure-static'
+syntax on 		"Enable syntax highlighting
 let g:netrw_banner=0
+set laststatus=2      "Always display status line 
 set mouse=a
 set number
 set nowrap
 set hlsearch
 set ignorecase
 set incsearch
-" use system clipboard
-set clipboard+=unnamedplus
-filetype plugin indent on
+set clipboard+=unnamedplus "use system clipboard
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set backspace=indent,eol,start
-
-" Plugin settings
-let NERDTreeShowHidden=1
-
-let g:airline#extensions#syntastic#enabled = 1
-set laststatus=2
-
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " use the_silver_searcher in ctrlp for faster performance
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -71,7 +64,7 @@ endif
 hi diffadd ctermfg=green guifg=#00ff00
 hi diffdelete ctermfg=red guifg=#ff0000
 
-color molokai
+color jellybeans
 
 let g:rainbow_conf = {
       \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -97,6 +90,3 @@ let g:rainbow_conf = {
       \}
 
 let g:rainbow_active = 1
-
-" use jsonpp to pretty print json
-command Jsonpp %!python -m json.tool
